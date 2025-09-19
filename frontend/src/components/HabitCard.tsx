@@ -12,6 +12,14 @@ interface HabitCardProps {
   onEdit: () => void;
 }
 
+interface ApiError {
+  response?: {
+    data?: {
+      error?: string;
+    };
+  };
+}
+
 const HabitCard: React.FC<HabitCardProps> = ({
   habit,
   onDelete,
@@ -32,9 +40,9 @@ const HabitCard: React.FC<HabitCardProps> = ({
         typeof error === 'object' &&
         error !== null &&
         'response' in error &&
-        typeof (error as any).response?.data?.error === 'string'
+        typeof (error as ApiError).response?.data?.error === 'string'
       ) {
-        toast.error((error as any).response.data.error);
+        toast.error((error as ApiError).response!.data!.error!);
       } else {
         toast.error('Failed to complete habit');
       }
@@ -55,9 +63,9 @@ const HabitCard: React.FC<HabitCardProps> = ({
         typeof error === 'object' &&
         error !== null &&
         'response' in error &&
-        typeof (error as any).response?.data?.error === 'string'
+        typeof (error as ApiError).response?.data?.error === 'string'
       ) {
-        toast.error((error as any).response.data.error);
+        toast.error((error as ApiError).response!.data!.error!);
       } else {
         toast.error('Failed to delete habit');
       }

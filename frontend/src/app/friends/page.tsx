@@ -281,7 +281,7 @@ export default function Friends() {
                         </svg>
                         <span>{activity.streak} day streak</span>
                       </div>
-                      <span className="text-gray-400">{formatDate(activity.updated极)}</span>
+                      <span className="text-gray-400">{formatDate(activity.updatedAt)}</span>
                     </div>
                   </div>
                   <button

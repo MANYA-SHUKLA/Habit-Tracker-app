@@ -17,6 +17,14 @@ const loginSchema = z.object({
 
 type LoginForm = z.infer<typeof loginSchema>;
 
+interface ApiError {
+  response?: {
+    data?: {
+      error?: string;
+    };
+  };
+}
+
 export default function Login() {
   const [isLoading, setIsLoading] = useState(false);
   const { login } = useAuth();
@@ -42,8 +50,9 @@ export default function Login() {
       login(token, user);
       toast.success('Login successful!');
       router.push('/dashboard');
-    } catch (error: any) {
-      toast.error(error.response?.data?.error || 'Login failed');
+    } catch (error: unknown) {
+      const apiError = error as ApiError;
+      toast.error(apiError.response?.data?.error || 'Login failed');
     } finally {
       setIsLoading(false);
     }

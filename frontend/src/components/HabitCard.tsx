@@ -66,7 +66,6 @@ const HabitCard: React.FC<HabitCardProps> = ({
     }
   };
 
-  // Check if habit is completed based on frequency
   const isCompleted = () => {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
@@ -111,7 +110,6 @@ const HabitCard: React.FC<HabitCardProps> = ({
     return 'bg-indigo-600 hover:bg-indigo-700 text-white';
   };
 
-  // Enhanced streak visualization - show fire emojis based on streak length
   const renderStreakVisualization = () => {
     if (habit.streak === 0) return null;
 
@@ -158,9 +156,7 @@ const HabitCard: React.FC<HabitCardProps> = ({
           <div className="flex-1 min-w-0">
             <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-1 drop-shadow-sm truncate">{habit.name}</h3>
             {habit.category && (
-              <span className="inline-block bg-indigo-200 text-indigo-800 text-xs px-2 py-1 rounded-full font-semibold select-none shadow-sm whitespace-nowrap">
-                {habit.category}
-              </span>
+              <span className="inline-block bg-indigo-200 text-indigo-800 text-xs px-2 py-1 rounded-full font-semibold select-none shadow-sm whitespace-nowrap">{habit.category}</span>
             )}
           </div>
           <div className="flex space-x-2 flex-shrink-0">

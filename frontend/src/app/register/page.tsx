@@ -36,7 +36,6 @@ export default function Register() {
   const onSubmit = async (data: RegisterForm) => {
     setIsLoading(true);
     try {
-      // Exclude confirmPassword intentionally before sending to backend
       const { confirmPassword, ...userData } = data;
       const response = await api.post('/auth/register', userData);
       const { token, data: { user } } = response.data;
@@ -207,7 +206,6 @@ export default function Register() {
           </div>
         </form>
       </div>
-      {/* Additional global animation styles */}
       <style jsx global>{`
         @keyframes fadeInUp {
           from {

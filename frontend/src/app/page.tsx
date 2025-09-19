@@ -12,7 +12,7 @@ export default function Home() {
     'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1470&q=80';
 
   const featureImages = [
-    'https://static.vecteezy.com/system/resources/previews/013/055/209/non_2x/project-tracking-goal-tracker-task-completion-or-checklist-to-remind-project-progress-concept-businessman-project-manager-holding-big-pencil-to-check-completed-tasks-in-project-management-timeline-free-vector.jpg',
+    'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1470&q=80',
     'https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=500&q=80',
     'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=500&q=80',
     'https://static.vecteezy.com/system/resources/previews/013/055/209/non_2x/project-tracking-goal-tracker-task-completion-or-checklist-to-remind-project-progress-concept-businessman-project-manager-holding-big-pencil-to-check-completed-tasks-in-project-management-timeline-free-vector.jpg',
@@ -75,8 +75,8 @@ export default function Home() {
               {/* Feature 1 */}
               <div className="text-center p-6 sm:p-8 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 transform hover:-translate-y-2 bg-gradient-to-b from-white to-blue-50 group cursor-pointer">
                 <Image
-                  src={featureImages[3]}
-                  alt="Track progress new illustration"
+                  src="https://img.freepik.com/free-vector/task-list-concept-illustration_114360-1249.jpg?w=826&t=st=1709727738~exp=1709728338~hmac=5d2d2a5d6a4f5b5b5c5d5e5f5a5b5c5d5e5f5a5b5c5d5e5f5a5b5c5d5e5f5a5b5c"
+                  alt="Track progress illustration"
                   width={112}
                   height={112}
                   className="w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28 mx-auto mb-4 sm:mb-6 rounded-full object-cover shadow-xl transition-transform duration-500 group-hover:scale-105"
@@ -92,7 +92,7 @@ export default function Home() {
               {/* Feature 2 */}
               <div className="text-center p-6 sm:p-8 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 transform hover:-translate-y-2 bg-gradient-to-b from-white to-purple-50 group cursor-pointer">
                 <Image
-                  src={featureImages[1]}
+                  src="https://img.freepik.com/free-vector/team-goals-concept-illustration_114360-10836.jpg?w=826&t=st=1709727771~exp=1709728371~hmac=5d2d2a5d6a4f5b5b5c5d5e5f5a5b5c5d5e5f5a5b5c5d5e5f5a5b5c5d5e5f5a5b5c"
                   alt="Social accountability illustration"
                   width={96}
                   height={96}
@@ -109,7 +109,7 @@ export default function Home() {
               {/* Feature 3 */}
               <div className="text-center p-6 sm:p-8 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 transform hover:-translate-y-2 bg-gradient-to-b from-white to-teal-50 group cursor-pointer">
                 <Image
-                  src={featureImages[2]}
+                  src="https://img.freepik.com/free-vector/data-visualization-concept-illustration_114360-7314.jpg?w=826&t=st=1709727803~exp=1709728403~hmac=5d2d2a5d6a4f5b5b5c5d5e5f5a5b5c5d5e5f5a5b5c5d5e5f5a5b5c5d5e5f5a5b5c"
                   alt="Visualize success illustration"
                   width={96}
                   height={96}

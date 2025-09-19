@@ -20,6 +20,14 @@ interface Activity {
   updatedAt: string;
 }
 
+interface ApiError {
+  response?: {
+    data?: {
+      error?: string;
+    };
+  };
+}
+
 export default function Friends() {
   const { user } = useAuth();
   const [searchQuery, setSearchQuery] = useState('');
@@ -37,8 +45,9 @@ export default function Friends() {
     try {
       const response = await api.get('/users/activity');
       setActivities(response.data.data.activities);
-    } catch (error: any) {
-      toast.error(error.response?.data?.error || 'Failed to fetch activities');
+    } catch (error: unknown) {
+      const apiError = error as ApiError;
+      toast.error(apiError.response?.data?.error || 'Failed to fetch activities');
     } finally {
       setActivityLoading(false);
     }
@@ -51,8 +60,9 @@ export default function Friends() {
     try {
       const response = await api.get(`/users/search?q=${encodeURIComponent(searchQuery)}`);
       setSearchResults(response.data.data.users);
-    } catch (error: any) {
-      toast.error(error.response?.data?.error || 'Failed to search users');
+    } catch (error: unknown) {
+      const apiError = error as ApiError;
+      toast.error(apiError.response?.data?.error || 'Failed to search users');
     } finally {
       setLoading(false);
     }
@@ -64,8 +74,9 @@ export default function Friends() {
       toast.success('User followed successfully!');
       setSearchResults(searchResults.filter((user) => user._id !== userId));
       fetchActivities();
-    } catch (error: any) {
-      toast.error(error.response?.data?.error || 'Failed to follow user');
+    } catch (error: unknown) {
+      const apiError = error as ApiError;
+      toast.error(apiError.response?.data?.error || 'Failed to follow user');
     }
   };
 
@@ -74,8 +85,9 @@ export default function Friends() {
       await api.post(`/users/${userId}/unfollow`);
       toast.success('User unfollowed successfully!');
       fetchActivities();
-    } catch (error: any) {
-      toast.error(error.response?.data?.error || 'Failed to unfollow user');
+    } catch (error: unknown) {
+      const apiError = error as ApiError;
+      toast.error(apiError.response?.data?.error || 'Failed to unfollow user');
     }
   };
 
@@ -109,7 +121,7 @@ export default function Friends() {
       <div className="fixed inset-0 -z-10 bg-gradient-to-t from-black via-transparent to-black opacity-80" />
 
       <main className="relative max-w-5xl mx-auto bg-black bg-opacity-70 backdrop-blur-md rounded-3xl shadow-2xl border border-gray-800 p-8 sm:p-12 mt-20 mb-20 transition-transform hover:scale-[1.03] duration-700 ease-in-out animate-fadeInUp">
-        <h1 className="text-4xl sm:text-5xl font-extrabold mb-12 drop-shadow-lg tracking-tight">
+        <h1 className="text-4极 sm:text-5xl font-extrabold mb-12 drop-shadow-lg tracking-tight">
           Friends Activity
         </h1>
 
@@ -152,7 +164,7 @@ export default function Friends() {
                   <path
                     className="opacity-75"
                     fill="currentColor"
-                    d="M4 12a8 8 0 018-8v8H4z"
+                    d="M4 12a8 8 0 018-8v8极4z"
                   />
                 </svg>
               ) : (
@@ -216,7 +228,7 @@ export default function Friends() {
 
           {activityLoading ? (
             <div className="flex justify-center items-center py-12">
-              <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-indigo-500"></div>
+              <div className="animate-sp极 rounded-full h-12 w-12 border-t-2 border-b-2 border-indigo-500"></div>
             </div>
           ) : activities.length === 0 ? (
             <div className="text-center py-12 sm:py-16 text-gray-400 font-semibold animate-fadeInUp">
@@ -224,7 +236,7 @@ export default function Friends() {
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-16 w-16 sm:h-20 sm:w-20 mx-auto mb-6"
                 fill="none"
-                viewBox="0 0 24 24"
+                viewBox="0 0 24 极4"
                 stroke="currentColor"
                 aria-hidden="true"
               >
@@ -232,7 +244,7 @@ export default function Friends() {
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth={2}
-                  d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
+                  d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 极 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 极 2 2 0 014 0z"
                 />
               </svg>
               <p className="text-2xl sm:text-3xl">No activity from your friends yet.</p>
@@ -257,7 +269,7 @@ export default function Friends() {
                       <span className="font-semibold">{activity.name}</span>
                     </p>
                     <div className="flex flex-wrap items-center mt-3 sm:mt-4 text-gray-300 text-base sm:text-lg gap-4">
-                      <div className="flex items-center text-yellow-500">
+                      <div className="极lex items-center text-yellow-500">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           className="h-5 w-5 mr-1"
@@ -269,7 +281,7 @@ export default function Friends() {
                         </svg>
                         <span>{activity.streak} day streak</span>
                       </div>
-                      <span className="text-gray-400">{formatDate(activity.updatedAt)}</span>
+                      <span className="text-gray-400">{formatDate(activity.updated极)}</span>
                     </div>
                   </div>
                   <button

@@ -21,6 +21,14 @@ const registerSchema = z.object({
 
 type RegisterForm = z.infer<typeof registerSchema>;
 
+interface ApiError {
+  response?: {
+    data?: {
+      error?: string;
+    };
+  };
+}
+
 export default function Register() {
   const [isLoading, setIsLoading] = useState(false);
   const { login } = useAuth();
@@ -36,20 +44,16 @@ export default function Register() {
   const onSubmit = async (data: RegisterForm) => {
     setIsLoading(true);
     try {
-      const { confirmPassword: _confirmPassword, ...userData } = data;
+      const { confirmPassword, ...userData } = data;
       const response = await api.post('/auth/register', userData);
       const { token, data: { user } } = response.data;
       login(token, user);
       toast.success('Registration successful!');
       router.push('/dashboard');
     } catch (error: unknown) {
-      if (
-        typeof error === 'object' &&
-        error !== null &&
-        'response' in error &&
-        typeof (error as any).response?.data?.error === 'string'
-      ) {
-        toast.error((error as any).response.data.error);
+      const apiError = error as ApiError;
+      if (apiError.response?.data?.error) {
+        toast.error(apiError.response.data.error);
       } else {
         toast.error('Registration failed');
       }

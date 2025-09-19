@@ -25,7 +25,6 @@ export default function Register() {
   const [isLoading, setIsLoading] = useState(false);
   const { login } = useAuth();
   const router = useRouter();
-
   const {
     register,
     handleSubmit,
@@ -34,19 +33,24 @@ export default function Register() {
     resolver: zodResolver(registerSchema),
   });
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const onSubmit = async (data: RegisterForm) => {
     setIsLoading(true);
-
     try {
+      // We exclude confirmPassword here; that's the intentional pattern
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       const { confirmPassword, ...userData } = data;
       const response = await api.post('/auth/register', userData);
       const { token, data: { user } } = response.data;
-
       login(token, user);
       toast.success('Registration successful!');
       router.push('/dashboard');
-    } catch (error: any) {
-      toast.error(error.response?.data?.error || 'Registration failed');
+    } catch (error: unknown) {
+      if (typeof error === 'object' && error && 'response' in error && (error as any).response?.data?.error) {
+        toast.error((error as any).response.data.error);
+      } else {
+        toast.error('Registration failed');
+      }
     } finally {
       setIsLoading(false);
     }
@@ -201,7 +205,6 @@ export default function Register() {
           </div>
         </form>
       </div>
-
       {/* Additional global animation styles */}
       <style jsx global>{`
         @keyframes fadeInUp {
@@ -214,7 +217,6 @@ export default function Register() {
             transform: translate3d(0, 0, 0);
           }
         }
-
         .animate-fadeInUp {
           animation: fadeInUp 0.8s ease forwards;
         }

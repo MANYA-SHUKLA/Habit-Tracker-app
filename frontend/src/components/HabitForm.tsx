@@ -16,10 +16,14 @@ const habitSchema = z.object({
 
 type HabitForm = z.infer<typeof habitSchema>;
 
+interface HabitWithId extends HabitForm {
+  _id: string;
+}
+
 interface HabitFormProps {
   onClose: () => void;
   onSuccess: () => void;
-  habit?: any; // For edit mode
+  habit?: HabitWithId; // Include _id here
 }
 
 const HabitForm: React.FC<HabitFormProps> = ({ onClose, onSuccess, habit }) => {
@@ -38,7 +42,7 @@ const HabitForm: React.FC<HabitFormProps> = ({ onClose, onSuccess, habit }) => {
 
   const onSubmit = async (data: HabitForm) => {
     try {
-      if (isEdit) {
+      if (isEdit && habit?._id) {
         await api.put(`/habits/${habit._id}`, data);
         toast.success('Habit updated successfully!');
       } else {
@@ -46,8 +50,17 @@ const HabitForm: React.FC<HabitFormProps> = ({ onClose, onSuccess, habit }) => {
         toast.success('Habit created successfully!');
       }
       onSuccess();
-    } catch (error: any) {
-      toast.error(error.response?.data?.error || 'Failed to save habit');
+    } catch (error: unknown) {
+      if (
+        typeof error === 'object' &&
+        error !== null &&
+        'response' in error &&
+        typeof (error as any).response?.data?.error === 'string'
+      ) {
+        toast.error((error as any).response.data.error);
+      } else {
+        toast.error('Failed to save habit');
+      }
     }
   };
 

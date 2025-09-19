@@ -7,6 +7,14 @@ import toast from 'react-hot-toast';
 import HabitForm from '@/components/HabitForm';
 import HabitCard from '@/components/HabitCard';
 
+interface ApiError {
+  response?: {
+    data?: {
+      error?: string;
+    };
+  };
+}
+
 export default function Dashboard() {
   const { user } = useAuth();
   const [habits, setHabits] = useState<Habit[]>([]);
@@ -22,8 +30,9 @@ export default function Dashboard() {
     try {
       const response = await api.get('/habits');
       setHabits(response.data.data.habits);
-    } catch (error: any) {
-      toast.error(error.response?.data?.error || 'Failed to fetch habits');
+    } catch (error: unknown) {
+      const apiError = error as ApiError;
+      toast.error(apiError.response?.data?.error || 'Failed to fetch habits');
     } finally {
       setLoading(false);
     }
@@ -77,7 +86,7 @@ export default function Dashboard() {
           </h1>
           <button
             onClick={() => setShowForm(true)}
-            className="bg-indigo-600 hover:bg-indigo-700 text-white px-4 sm:px-5 py-2 sm:py-3 rounded-lg sm:rounded-xl flex items-center shadow-lg hover:shadow-xl transition-all duration-300 font-semibold tracking-wide focus:outline-none focus:ring-4 focus:ring-indigo-500 focus:ring-opacity-50 w-full sm:w-auto justify-center whitespace-nowrap"
+            className="bg-indigo-极 hover:bg-indigo-700 text-white px-4 sm:px-5 py-2 sm:py-3 rounded-lg sm:rounded-xl flex items-center shadow-lg hover:shadow-xl transition-all duration-300 font-semibold tracking-wide focus:outline-none focus:ring-4 focus:ring-indigo-500 focus:ring-opacity-50 w-full sm:w-auto justify-center whitespace-nowrap"
             aria-label="Add new habit"
           >
             <svg
@@ -154,7 +163,7 @@ export default function Dashboard() {
                   setEditingHabit(null);
                 }}
                 onSuccess={editingHabit ? handleHabitUpdated : handleHabitCreated}
-                habit={editingHabit}
+                habit={editingHabit || undefined}
               />
             </div>
           </div>

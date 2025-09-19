@@ -36,7 +36,7 @@ export default function Register() {
   const onSubmit = async (data: RegisterForm) => {
     setIsLoading(true);
     try {
-      const { confirmPassword, ...userData } = data;
+      const { confirmPassword: _confirmPassword, ...userData } = data;
       const response = await api.post('/auth/register', userData);
       const { token, data: { user } } = response.data;
       login(token, user);

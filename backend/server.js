@@ -23,6 +23,20 @@ mongoose.connection.on('error', (err) => {
   console.log('Error connecting to MongoDB', err);
 });
 
+// Root route - Add this to handle the root URL
+app.get('/', (req, res) => {
+  res.json({
+    message: 'Habit Tracker API is running!',
+    version: '1.0.0',
+    endpoints: {
+      auth: '/api/auth',
+      habits: '/api/habits',
+      users: '/api/users'
+    },
+    documentation: 'Check the README for API documentation'
+  });
+});
+
 // Routes
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/habits', require('./routes/habits'));

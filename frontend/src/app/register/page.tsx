@@ -33,12 +33,10 @@ export default function Register() {
     resolver: zodResolver(registerSchema),
   });
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const onSubmit = async (data: RegisterForm) => {
     setIsLoading(true);
     try {
-      // We exclude confirmPassword here; that's the intentional pattern
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      // Exclude confirmPassword intentionally before sending to backend
       const { confirmPassword, ...userData } = data;
       const response = await api.post('/auth/register', userData);
       const { token, data: { user } } = response.data;
@@ -46,7 +44,12 @@ export default function Register() {
       toast.success('Registration successful!');
       router.push('/dashboard');
     } catch (error: unknown) {
-      if (typeof error === 'object' && error && 'response' in error && (error as any).response?.data?.error) {
+      if (
+        typeof error === 'object' &&
+        error !== null &&
+        'response' in error &&
+        typeof (error as any).response?.data?.error === 'string'
+      ) {
         toast.error((error as any).response.data.error);
       } else {
         toast.error('Registration failed');
@@ -56,7 +59,6 @@ export default function Register() {
     }
   };
 
-  // Background image URL - professional, subtle texture or abstract color gradient
   const backgroundImageUrl = 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1470&q=80';
 
   return (

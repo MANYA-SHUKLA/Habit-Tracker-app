@@ -23,7 +23,7 @@ interface HabitWithId extends HabitForm {
 interface HabitFormProps {
   onClose: () => void;
   onSuccess: () => void;
-  habit?: HabitWithId; // Include _id here
+  habit?: HabitWithId; // Include _id here for edit mode
 }
 
 const HabitForm: React.FC<HabitFormProps> = ({ onClose, onSuccess, habit }) => {

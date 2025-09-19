@@ -81,11 +81,11 @@ const HabitCard: React.FC<HabitCardProps> = ({
     } else {
       // Check if completed this week (weekly habit)
       const startOfWeek = new Date(today);
-      startOfWeek.setDate(today.getDate() - today.getDay()); // Sunday
+      startOfWeek.setDate(today.getDate() - today.getDay());
       startOfWeek.setHours(0, 0, 0, 0);
 
       const endOfWeek = new Date(today);
-      endOfWeek.setDate(today.getDate() + (6 - today.getDay())); // Saturday
+      endOfWeek.setDate(today.getDate() + (6 - today.getDay()));
       endOfWeek.setHours(23, 59, 59, 999);
 
       return habit.completions.some((completion) => {
@@ -122,7 +122,7 @@ const HabitCard: React.FC<HabitCardProps> = ({
     if (habit.streak === 0) return null;
 
     const fires = [];
-    const fireCount = Math.min(Math.floor(habit.streak / 7) + 1, 5); // Max 5 fires
+    const fireCount = Math.min(Math.floor(habit.streak / 7) + 1, 5);
 
     for (let i = 0; i < fireCount; i++) {
       fires.push(
@@ -146,7 +146,6 @@ const HabitCard: React.FC<HabitCardProps> = ({
     );
   };
 
-  // Background image URL for card subtle decorative background
   const cardBackgroundUrl =
     'https://images.unsplash.com/photo-1506765515384-028b60a970df?auto=format&fit=crop&w=600&q=80';
 
@@ -160,7 +159,6 @@ const HabitCard: React.FC<HabitCardProps> = ({
       }}
       aria-label={`Habit card for ${habit.name}`}
     >
-      {/* Overlay to enhance readability */}
       <div className="absolute inset-0 bg-white bg-opacity-90 backdrop-blur-sm"></div>
 
       <div className="relative p-4 sm:p-6 flex flex-col h-full">
@@ -254,16 +252,11 @@ const HabitCard: React.FC<HabitCardProps> = ({
           </div>
         </div>
 
-        {/* Enhanced streak visualization */}
         {renderStreakVisualization()}
 
-        {/* Completion progress bar */}
         <div
           className="w-full max-w-full bg-gray-200 rounded-full h-2 mb-4 mt-2"
-          aria-label={`${Math.min(
-            100,
-            (habit.streak / 30) * 100
-          )}% progress to 30-day milestone`}
+          aria-label={`${Math.min(100, (habit.streak / 30) * 100)}% progress to 30-day milestone`}
         >
           <div
             className="bg-green-500 h-2 rounded-full transition-all duration-500"

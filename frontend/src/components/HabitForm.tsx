@@ -26,6 +26,14 @@ interface HabitFormProps {
   habit?: HabitWithId;
 }
 
+interface ApiError {
+  response?: {
+    data?: {
+      error?: string;
+    };
+  };
+}
+
 const HabitForm: React.FC<HabitFormProps> = ({ onClose, onSuccess, habit }) => {
   const isEdit = Boolean(habit);
 
@@ -51,13 +59,9 @@ const HabitForm: React.FC<HabitFormProps> = ({ onClose, onSuccess, habit }) => {
       }
       onSuccess();
     } catch (error: unknown) {
-      if (
-        typeof error === 'object' &&
-        error !== null &&
-        'response' in error &&
-        typeof (error as any).response?.data?.error === 'string'
-      ) {
-        toast.error((error as any).response.data.error);
+      const apiError = error as ApiError;
+      if (apiError.response?.data?.error) {
+        toast.error(apiError.response.data.error);
       } else {
         toast.error('Failed to save habit');
       }

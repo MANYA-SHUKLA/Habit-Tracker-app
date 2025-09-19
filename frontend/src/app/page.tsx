@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useAuth } from '@/context/AuthContext';
 
 export default function Home() {
@@ -73,9 +74,11 @@ export default function Home() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-12">
               {/* Feature 1 */}
               <div className="text-center p-6 sm:p-8 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 transform hover:-translate-y-2 bg-gradient-to-b from-white to-blue-50 group cursor-pointer">
-                <img
+                <Image
                   src={featureImages[3]}
                   alt="Track progress new illustration"
+                  width={112}
+                  height={112}
                   className="w-20 h-20 sm:w-24 sm:h-24 lg:w-28 lg:h-28 mx-auto mb-4 sm:mb-6 rounded-full object-cover shadow-xl transition-transform duration-500 group-hover:scale-105"
                 />
                 <h3 className="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4 text-gray-900 transition-colors group-hover:text-indigo-600">
@@ -88,9 +91,11 @@ export default function Home() {
 
               {/* Feature 2 */}
               <div className="text-center p-6 sm:p-8 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 transform hover:-translate-y-2 bg-gradient-to-b from-white to-purple-50 group cursor-pointer">
-                <img
+                <Image
                   src={featureImages[1]}
                   alt="Social accountability illustration"
+                  width={96}
+                  height={96}
                   className="w-20 h-20 sm:w-24 sm:h-24 lg:w-24 lg:h-24 mx-auto mb-4 sm:mb-6 rounded-full object-cover shadow-lg transition-transform duration-500 group-hover:scale-105"
                 />
                 <h3 className="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4 text-gray-900 transition-colors group-hover:text-purple-600">
@@ -103,9 +108,11 @@ export default function Home() {
 
               {/* Feature 3 */}
               <div className="text-center p-6 sm:p-8 rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 transform hover:-translate-y-2 bg-gradient-to-b from-white to-teal-50 group cursor-pointer">
-                <img
+                <Image
                   src={featureImages[2]}
                   alt="Visualize success illustration"
+                  width={96}
+                  height={96}
                   className="w-20 h-20 sm:w-24 sm:h-24 lg:w-24 lg:h-24 mx-auto mb-4 sm:mb-6 rounded-full object-cover shadow-lg transition-transform duration-500 group-hover:scale-105"
                 />
                 <h3 className="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4 text-gray-900 transition-colors group-hover:text-teal-600">
